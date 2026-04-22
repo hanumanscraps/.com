@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanuman Scraps - Premium Scrap Dealer</title>
+    <meta name="description"
+        content="Hanuman Scraps offers the best prices for your recyclable materials. View our live pricing for iron, steel, copper, and more.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Hanuman_scarps.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="Hanuman_scarps.png" alt="Hanuman Scraps Logo" class="brand-logo"> Hanuman Scraps
+            </a>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#pricing" class="nav-link">Live Prices</a>
+                <a href="#why-us" class="nav-link">Why Us</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <div class="auth-section" id="auth-container">
+                <button id="admin-login-btn" class="btn btn-outline"><i class="fa-solid fa-user-lock"></i>
+                    Admin</button>
+                <button id="admin-logout-btn" class="btn btn-outline hidden"><i class="fa-solid fa-sign-out-alt"></i>
+                    Logout</button>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="container hero-content">
+            <h1 class="fade-up">Turn Your Scrap<br>Into <span class="highlight">Value</span>.</h1>
+            <p class="fade-up delay-1">Transparent pricing, eco-friendly processing, and instantly verified rates. Join
+                our network today.</p>
+            <div class="hero-buttons fade-up delay-2">
+                <a href="#pricing" class="btn btn-primary">Check Live Prices</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Pricing Section -->
+        <section id="pricing" class="section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Live Scrap Prices</h2>
+                    <p>Our rates are updated dynamically. Bring in your materials for top value.</p>
+                    <div id="admin-status-indicator" class="admin-badge hidden">
+                        <i class="fa-solid fa-unlock"></i> Edit Mode Active
+                    </div>
+                </div>
+
+                <div class="pricing-grid" id="pricing-grid">
+                    <!-- Cards will be dynamically injected here via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Us Section -->
+        <section id="why-us" class="section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Why Choose <span class="highlight">Us</span>?</h2>
+                    <p>We provide the best scrap selling experience in the market.</p>
+                </div>
+                <div class="why-us-grid">
+                    <div class="why-card glass-card scale-in delay-1">
+                        <div class="icon-wrapper bounce-hover">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <h3>Best Market Prices</h3>
+                        <p>We offer dynamically updated, highly competitive rates for all your scrap materials.</p>
+                    </div>
+                    <div class="why-card glass-card scale-in delay-2">
+                        <div class="icon-wrapper bounce-hover">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <h3>Fast Free for Bulk Pickup</h3>
+                        <p>Got bulk scrap? We will come to your location and pick it up completely free of charge.</p>
+                    </div>
+                    <div class="why-card glass-card scale-in delay-3">
+                        <div class="icon-wrapper bounce-hover">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3>Instant Payment</h3>
+                        <p>No waiting around. Get paid instantly via cash or digital transfer as soon as we weigh.</p>
+                    </div>
+                    <div class="why-card glass-card scale-in delay-4">
+                        <div class="icon-wrapper bounce-hover">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <h3>Honest Weighing</h3>
+                        <p>Our digital scales are certified and open for you to verify. 100% transparent process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section bg-alt">
+            <div class="container about-container">
+                <div class="about-content fade-in-left">
+                    <h2>Trusted by <span class="highlight">Everyone</span></h2>
+                    <p>At Hanuman Scraps, we believe every piece of material deserves a second life. We provide
+                        competitive,
+                        transparent prices to encourage the community to recycle metal, paper, plastic, and e-waste
+                        responsibly.</p>
+                    <ul class="about-features">
+                        <li><i class="fa-solid fa-check-circle"></i> Certified Weighing Standards</li>
+                        <li><i class="fa-solid fa-check-circle"></i> Transparent Market Pricing</li>
+                        <li><i class="fa-solid fa-check-circle"></i> Eco-Friendly Processing</li>
+                        <li><i class="fa-solid fa-check-circle"></i> Instant Transactions</li>
+                    </ul>
+                </div>
+                <div class="about-image fade-in-right">
+                    <div class="mixed-scrap-mosaic glass-card">
+                        <img src="iron.png" alt="Iron Scrap">
+                        <img src="steel.png" alt="Steel Scrap">
+                        <img src="copper.png" alt="Copper Scrap">
+                        <img src="plastic.png" alt="Plastic Scrap">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Get in Touch</h2>
+                    <p>Have bulk scrap? Contact us for special corporate rates and pickup services.</p>
+                </div>
+
+                <div class="contact-wrapper">
+                    <div class="contact-info fade-in-left">
+                        <div class="info-item glass-card">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <h4>Yemmiganur</h4>
+                                <p>Mantralayam Road, Yemmiganur</p>
+                            </div>
+                        </div>
+                        <div class="info-item glass-card">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <h4>Call Us</h4>
+                                <p>+91 9014016066</p>
+                            </div>
+                        </div>
+                        <div class="info-item glass-card">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>hanumanscraps@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="contact-form" class="contact-form glass-card fade-in-right">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" placeholder="Tell us about your materials..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                        <div id="form-feedback" class="form-feedback hidden">Message sent successfully! (Demo)</div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <img src="Hanuman_scarps.png" alt="Hanuman Scraps Logo" class="brand-logo"> Hanuman Scraps
+                </a>
+                <p>Making the world cleaner, one scrap at a time.</p>
+            </div>
+            <div class="footer-copy">
+                <p>&copy; <span id="year"></span> Hanuman Scraps. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="login-modal-overlay" class="modal-overlay hidden">
+        <div class="modal glass-card">
+            <div class="modal-header">
+                <h3>Admin Access</h3>
+                <button id="close-modal" class="btn-close"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <p class="hint">Use password: <b>admin</b></p>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div id="login-error" class="error-msg hidden">Incorrect password.</div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
