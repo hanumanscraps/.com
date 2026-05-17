@@ -1,12 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hanuman Scraps - Premium Scrap Dealer</title>
     <meta name="description"
-        content="Hanuman Scraps offers the best prices for your recyclable materials. View our live pricing for iron, steel, copper, and more.">
+        content="Hanuman Scraps offers the best prices for your recyclable materials. View our live pricing, book a pickup, or buy scrap material from our marketplace.">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RecyclingCenter",
+      "name": "Hanuman Scraps",
+      "image": "Hanuman_scarps.png",
+      "telephone": "+919014016066",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mantralayam Road",
+        "addressLocality": "Yemmiganur",
+        "addressRegion": "Andhra Pradesh",
+        "addressCountry": "IN"
+      },
+      "priceRange": "$$"
+    }
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="Hanuman_scarps.png">
@@ -14,73 +33,131 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Loading Animation -->
+    <div id="loader" class="loader-wrapper">
+        <div class="loader-content">
+            <img src="Hanuman_scarps.png" alt="Hanuman Scraps Logo" class="loader-logo">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="Hanuman_scarps.png" alt="Hanuman Scraps Logo" class="brand-logo"> Hanuman Scraps
+                <img src="Hanuman_scarps.png" alt="Hanuman Scraps Logo" class="brand-logo"> <span
+                    class="logo-text">Hanuman Scraps</span>
             </a>
 
             <div class="nav-links" id="nav-links">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#pricing" class="nav-link">Live Prices</a>
-                <a href="#why-us" class="nav-link">Why Us</a>
-                <a href="#about" class="nav-link">About</a>
+                <a href="#marketplace" class="nav-link">Marketplace</a>
+                <a href="#booking" class="nav-link">Book Pickup</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
 
-            <div class="auth-section" id="auth-container">
-                <button id="admin-login-btn" class="btn btn-outline"><i class="fa-solid fa-user-lock"></i>
-                    Admin</button>
-                <button id="admin-logout-btn" class="btn btn-outline hidden"><i class="fa-solid fa-sign-out-alt"></i>
-                    Logout</button>
+            <div class="nav-tools">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div class="auth-section" id="auth-container">
+                    <button id="admin-login-btn" class="btn btn-outline btn-sm"><i class="fa-solid fa-user-lock"></i>
+                        Admin</button>
+                    <button id="admin-dash-btn" class="btn btn-primary btn-sm hidden"><i
+                            class="fa-solid fa-gauge-high"></i> Dashboard</button>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
         </div>
     </nav>
 
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/919014016066" target="_blank" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     <!-- Hero Section -->
     <header id="home" class="hero">
-        <div class="hero-bg-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
+        <div class="hero-bg-overlay"></div>
+        <!-- Abstract Shapes -->
+        <div class="hero-shapes">
+            <div class="shape s1"></div>
+            <div class="shape s2"></div>
         </div>
+
         <div class="container hero-content">
-            <h1 class="fade-up">Turn Your Scrap<br>Into <span class="highlight">Value</span>.</h1>
-            <p class="fade-up delay-1">Transparent pricing, eco-friendly processing, and instantly verified rates. Join
-                our network today.</p>
-            <div class="hero-buttons fade-up delay-2">
-                <a href="#pricing" class="btn btn-primary">Check Live Prices</a>
-                <a href="#about" class="btn btn-secondary">Learn More</a>
+            <div class="hero-text-wrapper">
+                <h1 class="hero-title">Turn Your Scrap<br>Into <span class="text-gradient">Value</span>.</h1>
+                <p class="hero-subtitle">Industrial-grade recycling solutions. Transparent pricing, eco-friendly
+                    processing, and instantly verified rates. Join our premium network today.</p>
+                <div class="hero-buttons">
+                    <a href="#pricing" class="btn btn-primary btn-lg">Check Live Prices</a>
+                    <a href="#booking" class="btn btn-secondary btn-lg">Book Pickup</a>
+                    <a href="#marketplace" class="btn btn-outline btn-lg">Sell Scrap</a>
+                </div>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item glass-panel">
+                    <h3 class="stat-num" data-target="10000">0</h3><span class="stat-plus">+</span>
+                    <p>KG Recycled</p>
+                </div>
+                <div class="stat-item glass-panel">
+                    <h3 class="stat-num" data-target="5000">0</h3><span class="stat-plus">+</span>
+                    <p>Happy Customers</p>
+                </div>
+                <div class="stat-item glass-panel">
+                    <h3 class="stat-text"><i class="fa-solid fa-award"></i></h3>
+                    <p>Best Market Price</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Ticker -->
+        <div class="ticker-wrap">
+            <div class="ticker-heading">LIVE MARKET</div>
+            <div class="ticker">
+                <div class="ticker__inner" id="market-ticker">
+                    <!-- Ticker items dynamically loaded -->
+                </div>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- Pricing Section -->
-        <section id="pricing" class="section">
+        <!-- Live Scrap Pricing Section -->
+        <section id="pricing" class="section section-darker">
             <div class="container">
-                <div class="section-header fade-up">
-                    <h2>Live Scrap Prices</h2>
-                    <p>Our rates are updated dynamically. Bring in your materials for top value.</p>
-                    <div id="admin-status-indicator" class="admin-badge hidden">
-                        <i class="fa-solid fa-unlock"></i> Edit Mode Active
-                    </div>
+                <div class="section-header gsap-fade-up">
+                    <h2 class="section-title">Live Scrap <span class="text-gradient">Prices</span></h2>
+                    <p class="section-desc">Our rates are updated dynamically. Bring in your materials for top value.
+                    </p>
+                </div>
+
+                <div class="pricing-filters gsap-fade-up">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="metal">Metal</button>
+                    <button class="filter-btn" data-filter="plastic">Plastic</button>
+                    <button class="filter-btn" data-filter="ewaste">E-Waste</button>
+                    <button class="filter-btn" data-filter="paper">Paper</button>
                 </div>
 
                 <div class="pricing-grid" id="pricing-grid">
@@ -89,68 +166,205 @@
             </div>
         </section>
 
-        <!-- Why Us Section -->
-        <section id="why-us" class="section">
+        <!-- Value Calculator Section -->
+        <section id="calculator" class="section">
             <div class="container">
-                <div class="section-header fade-up">
-                    <h2>Why Choose <span class="highlight">Us</span>?</h2>
-                    <p>We provide the best scrap selling experience in the market.</p>
-                </div>
-                <div class="why-us-grid">
-                    <div class="why-card glass-card scale-in delay-1">
-                        <div class="icon-wrapper bounce-hover">
-                            <i class="fa-solid fa-coins"></i>
-                        </div>
-                        <h3>Best Market Prices</h3>
-                        <p>We offer dynamically updated, highly competitive rates for all your scrap materials.</p>
+                <div class="calc-wrapper glass-panel gsap-scale-in">
+                    <div class="calc-content">
+                        <h2>Scrap Value <span class="text-gradient">Calculator</span></h2>
+                        <p>Estimate the value of your scrap materials instantly before booking a pickup.</p>
+                        <form id="scrap-calculator" class="calc-form">
+                            <div class="form-group">
+                                <label for="calc-material">Material Type</label>
+                                <select id="calc-material" required>
+                                    <option value="" disabled selected>Select Material</option>
+                                    <!-- Options loaded via JS -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="calc-weight">Estimated Weight (kg)</label>
+                                <input type="number" id="calc-weight" min="1" placeholder="e.g. 50" required>
+                            </div>
+                        </form>
                     </div>
-                    <div class="why-card glass-card scale-in delay-2">
-                        <div class="icon-wrapper bounce-hover">
-                            <i class="fa-solid fa-truck-fast"></i>
-                        </div>
-                        <h3>Fast Free for Bulk Pickup</h3>
-                        <p>Got bulk scrap? We will come to your location and pick it up completely free of charge.</p>
-                    </div>
-                    <div class="why-card glass-card scale-in delay-3">
-                        <div class="icon-wrapper bounce-hover">
-                            <i class="fa-solid fa-bolt"></i>
-                        </div>
-                        <h3>Instant Payment</h3>
-                        <p>No waiting around. Get paid instantly via cash or digital transfer as soon as we weigh.</p>
-                    </div>
-                    <div class="why-card glass-card scale-in delay-4">
-                        <div class="icon-wrapper bounce-hover">
-                            <i class="fa-solid fa-scale-balanced"></i>
-                        </div>
-                        <h3>Honest Weighing</h3>
-                        <p>Our digital scales are certified and open for you to verify. 100% transparent process.</p>
+                    <div class="calc-result">
+                        <h3>Estimated Value</h3>
+                        <div class="result-amount">₹<span id="calc-total">0</span></div>
+                        <p class="result-note">*Final value may vary based on material quality.</p>
+                        <a href="#booking" class="btn btn-primary btn-block mt-3">Book Pickup Now</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="section bg-alt">
-            <div class="container about-container">
-                <div class="about-content fade-in-left">
-                    <h2>Trusted by <span class="highlight">Everyone</span></h2>
-                    <p>At Hanuman Scraps, we believe every piece of material deserves a second life. We provide
-                        competitive,
-                        transparent prices to encourage the community to recycle metal, paper, plastic, and e-waste
-                        responsibly.</p>
-                    <ul class="about-features">
-                        <li><i class="fa-solid fa-check-circle"></i> Certified Weighing Standards</li>
-                        <li><i class="fa-solid fa-check-circle"></i> Transparent Market Pricing</li>
-                        <li><i class="fa-solid fa-check-circle"></i> Eco-Friendly Processing</li>
-                        <li><i class="fa-solid fa-check-circle"></i> Instant Transactions</li>
-                    </ul>
+        <!-- Scrap Selling Marketplace Section -->
+        <section id="marketplace" class="section section-darker">
+            <div class="container">
+                <div class="section-header gsap-fade-up">
+                    <h2 class="section-title">Scrap <span class="text-gradient">Marketplace</span></h2>
+                    <p class="section-desc">Processed and sorted scrap materials available for industrial bulk purchase.
+                    </p>
                 </div>
-                <div class="about-image fade-in-right">
-                    <div class="mixed-scrap-mosaic glass-card">
-                        <img src="iron.png" alt="Iron Scrap">
-                        <img src="steel.png" alt="Steel Scrap">
-                        <img src="copper.png" alt="Copper Scrap">
-                        <img src="plastic.png" alt="Plastic Scrap">
+
+                <div class="marketplace-grid" id="marketplace-grid">
+                    <!-- Marketplace items dynamically injected -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Pickup Booking Section -->
+        <section id="booking" class="section">
+            <div class="container">
+                <div class="booking-wrapper">
+                    <div class="booking-info gsap-fade-left">
+                        <h2 class="section-title">Schedule a <span class="text-gradient">Pickup</span></h2>
+                        <p class="section-desc">Got bulk scrap? We will come to your location. Fill out the form to
+                            schedule a hassle-free pickup via WhatsApp.</p>
+                        <ul class="booking-features">
+                            <li><i class="fa-solid fa-check text-gradient"></i> Free pickup for bulk quantities</li>
+                            <li><i class="fa-solid fa-check text-gradient"></i> On-the-spot digital weighing</li>
+                            <li><i class="fa-solid fa-check text-gradient"></i> Instant cash or UPI payment</li>
+                        </ul>
+                    </div>
+                    <div class="booking-form-container glass-panel gsap-fade-right">
+                        <form id="booking-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" id="book-name" required placeholder="Your Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="book-phone" required placeholder="10-digit number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Pickup Address</label>
+                                <textarea id="book-address" rows="3" required placeholder="Full Address"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Preferred Date</label>
+                                    <input type="date" id="book-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Approx. Weight (kg)</label>
+                                    <input type="number" id="book-est-weight" placeholder="e.g. 100">
+                                </div>
+                            </div>
+                            <!-- LocalStorage cannot handle large images well without quota issues. We ask them to send on WA -->
+                            <div class="alert-box">
+                                <i class="fa-solid fa-camera"></i> You can share scrap photos directly on WhatsApp after
+                                clicking book!
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block"><i
+                                    class="fa-brands fa-whatsapp"></i> Book via WhatsApp</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="section section-darker">
+            <div class="container">
+                <div class="section-header gsap-fade-up">
+                    <h2 class="section-title">Why Choose <span class="text-gradient">Us</span>?</h2>
+                    <p class="section-desc">We provide the most professional scrap recycling experience.</p>
+                </div>
+                <div class="why-us-grid">
+                    <div class="feature-card glass-panel gsap-scale-in">
+                        <div class="icon-box"><i class="fa-solid fa-coins"></i></div>
+                        <h3>Best Price Guarantee</h3>
+                        <p>We monitor industrial rates to offer you the most competitive payouts.</p>
+                    </div>
+                    <div class="feature-card glass-panel gsap-scale-in delay-1">
+                        <div class="icon-box"><i class="fa-solid fa-truck-fast"></i></div>
+                        <h3>Free Bulk Pickup</h3>
+                        <p>Our fleet is ready to collect bulk materials directly from your location.</p>
+                    </div>
+                    <div class="feature-card glass-panel gsap-scale-in delay-2">
+                        <div class="icon-box"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h3>Honest Weighing</h3>
+                        <p>100% transparent process with certified digital scales right in front of you.</p>
+                    </div>
+                    <div class="feature-card glass-panel gsap-scale-in delay-3">
+                        <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                        <h3>Instant Payment</h3>
+                        <p>Get paid instantly via Cash, IMPS, or UPI right after weighing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section">
+            <div class="container">
+                <div class="section-header gsap-fade-up">
+                    <h2 class="section-title">Client <span class="text-gradient">Testimonials</span></h2>
+                </div>
+
+                <div class="swiper testimonial-swiper gsap-fade-up">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-card glass-panel">
+                                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i></div>
+                                <p class="quote">"Extremely professional service. Their pickup was on time, and the
+                                    weighing was totally transparent. Best rates in the city!"</p>
+                                <div class="author">- Rajesh K., Factory Owner</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card glass-panel">
+                                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i></div>
+                                <p class="quote">"I sold my old office e-waste and furniture. Hanuman Scraps handled
+                                    everything smoothly. Highly recommended."</p>
+                                <div class="author">- Amit Verma, IT Manager</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card glass-panel">
+                                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star-half-stroke"></i></div>
+                                <p class="quote">"The live pricing feature is great. I know exactly what I am getting
+                                    before they even arrive. Great initiative."</p>
+                                <div class="author">- Sneha D., Resident</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section section-darker">
+            <div class="container">
+                <div class="section-header gsap-fade-up">
+                    <h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2>
+                </div>
+                <div class="faq-container gsap-fade-up">
+                    <div class="faq-item glass-panel">
+                        <div class="faq-question">What is the minimum quantity for a free pickup? <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-answer">For residential, we recommend a minimum of 50kg. For commercial and
+                            industrial scrap, we provide free pickup for 100kg and above.</div>
+                    </div>
+                    <div class="faq-item glass-panel">
+                        <div class="faq-question">How are your scrap prices determined? <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-answer">Our rates are dynamically updated based on the current market industrial
+                            rates for metals, paper, and plastics. We ensure you get the most competitive value.</div>
+                    </div>
+                    <div class="faq-item glass-panel">
+                        <div class="faq-question">Do you accept E-waste? <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-answer">Yes, we safely collect and recycle e-waste including old computers,
+                            batteries, wires, and appliances.</div>
                     </div>
                 </div>
             </div>
@@ -159,29 +373,29 @@
         <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="container">
-                <div class="section-header fade-up">
-                    <h2>Get in Touch</h2>
-                    <p>Have bulk scrap? Contact us for special corporate rates and pickup services.</p>
+                <div class="section-header gsap-fade-up">
+                    <h2 class="section-title">Get in <span class="text-gradient">Touch</span></h2>
+                    <p class="section-desc">Have queries or corporate bulk scrap? Contact us.</p>
                 </div>
 
                 <div class="contact-wrapper">
-                    <div class="contact-info fade-in-left">
-                        <div class="info-item glass-card">
-                            <i class="fa-solid fa-location-dot"></i>
+                    <div class="contact-info gsap-fade-left">
+                        <div class="info-item glass-panel">
+                            <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
                             <div>
-                                <h4>Yemmiganur</h4>
-                                <p>Mantralayam Road, Yemmiganur</p>
+                                <h4>Location</h4>
+                                <p>16th Main, Mico Layout, Hongasandra <br> Bangalore 560068</p>
                             </div>
                         </div>
-                        <div class="info-item glass-card">
-                            <i class="fa-solid fa-phone"></i>
+                        <div class="info-item glass-panel">
+                            <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
                             <div>
                                 <h4>Call Us</h4>
                                 <p>+91 9014016066</p>
                             </div>
                         </div>
-                        <div class="info-item glass-card">
-                            <i class="fa-solid fa-envelope"></i>
+                        <div class="info-item glass-panel">
+                            <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
                             <div>
                                 <h4>Email Us</h4>
                                 <p>hanumanscraps@gmail.com</p>
@@ -189,65 +403,151 @@
                         </div>
                     </div>
 
-                    <form id="contact-form" class="contact-form glass-card fade-in-right">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Your Name" required>
+                    <a href="https://maps.app.goo.gl/fuEHvcHRHF3QEHPNA" target="_blank"
+                        class="map-container glass-panel gsap-fade-right clickable-map">
+                        <iframe
+                            src="https://maps.google.com/maps?q=12.888995,77.630282&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                            width="100%" height="100%"
+                            style="border:0; pointer-events: none; border-radius: var(--radius); position: absolute; top: 0; left: 0;"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <div class="map-overlay-btn">
+                            <i class="fa-solid fa-map-location-dot"></i> Open in Google Maps
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" rows="4" placeholder="Tell us about your materials..."
-                                required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
-                        <div id="form-feedback" class="form-feedback hidden">Message sent successfully! (Demo)</div>
-                    </form>
+                    </a>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <a href="#" class="logo">
-                    <img src="Hanuman_scarps.png" alt="Hanuman Scraps Logo" class="brand-logo"> Hanuman Scraps
-                </a>
-                <p>Making the world cleaner, one scrap at a time.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="Hanuman_scarps.png" alt="Hanuman Scraps Logo" class="brand-logo"> Hanuman Scraps
+                    </a>
+                    <p class="footer-desc">Premium scrap recycling services. Turning your waste into industrial value.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#pricing">Live Prices</a></li>
+                        <li><a href="#marketplace">Marketplace</a></li>
+                        <li><a href="#booking">Book Pickup</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-copy">
+            <div class="footer-bottom">
                 <p>&copy; <span id="year"></span> Hanuman Scraps. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Admin Login Modal -->
-    <div id="login-modal-overlay" class="modal-overlay hidden">
-        <div class="modal glass-card">
+    <div id="login-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
             <div class="modal-header">
                 <h3>Admin Access</h3>
-                <button id="close-modal" class="btn-close"><i class="fa-solid fa-times"></i></button>
+                <button class="btn-close close-modal"><i class="fa-solid fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <form id="login-form">
-                    <p class="hint">Use password: <b>admin</b></p>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" required>
+                        <label>Username</label>
+                        <input type="text" id="admin-user" required autocomplete="username">
                     </div>
-                    <div id="login-error" class="error-msg hidden">Incorrect password.</div>
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="admin-pass" required autocomplete="current-password">
+                    </div>
+                    <div id="login-error" class="error-msg hidden">Invalid credentials.</div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Admin Dashboard Modal -->
+    <div id="admin-dashboard-modal" class="modal-overlay hidden">
+        <div class="modal-content admin-modal glass-panel">
+            <div class="modal-header">
+                <h3>Admin Dashboard</h3>
+                <div class="admin-header-actions">
+                    <button id="admin-logout-btn" class="btn btn-outline btn-sm"><i
+                            class="fa-solid fa-sign-out-alt"></i> Logout</button>
+                    <button class="btn-close close-dash"><i class="fa-solid fa-times"></i></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="tab-prices">Manage Prices</button>
+                    <button class="tab-btn" data-tab="tab-marketplace">Marketplace</button>
+                </div>
+
+                <!-- Tab: Prices -->
+                <div id="tab-prices" class="tab-content active">
+                    <p class="mb-3 text-muted">Update live prices for scrap categories.</p>
+                    <div id="admin-price-list" class="admin-list">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Tab: Marketplace -->
+                <div id="tab-marketplace" class="tab-content hidden">
+                    <p class="mb-3 text-muted">Add products available for resale.</p>
+                    <form id="add-marketplace-form" class="mb-4">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="mp-title" placeholder="Product Title" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="mp-price" placeholder="Price (₹)" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="mp-qty" placeholder="Quantity Available" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="mp-image" accept="image/*" required>
+                                <small class="text-muted">Max size: 500kb (LocalStorage limit)</small>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Add Product</button>
+                    </form>
+                    <h4>Current Listings</h4>
+                    <div id="admin-marketplace-list" class="admin-list mt-2">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP & Swiper Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Custom Script -->
     <script src="script.js"></script>
 </body>
 
