@@ -10,18 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'ewaste', name: 'E-Waste (General)', category: 'ewaste', price: 150, unit: 'kg', image: 'ewaste.png' }
     ];
 
-    const defaultMarketplace = [
-        { id: 'mp1', title: 'Sorted Iron Scrap', price: 30, qty: '500kg', image: 'iron.png' },
-        { id: 'mp2', title: 'Industrial Copper Wires', price: 680, qty: '50kg', image: 'copper.png' }
-    ];
-
     let pricesData = JSON.parse(localStorage.getItem('hs_prices_v4')) || defaultPrices;
-    let marketData = JSON.parse(localStorage.getItem('hs_market_v4')) || defaultMarketplace;
     let isAdmin = sessionStorage.getItem('hs_admin') === 'true';
 
     function saveData() {
         localStorage.setItem('hs_prices_v4', JSON.stringify(pricesData));
-        localStorage.setItem('hs_market_v4', JSON.stringify(marketData));
     }
 
     // Ensure fallback images if missing or outdated SVG
@@ -36,20 +29,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Theme Management ---
     const themeToggle = document.getElementById('theme-toggle');
+    const themePicker = document.querySelector('.theme-picker');
+    const themeOptions = document.querySelectorAll('.theme-option');
     const htmlEl = document.documentElement;
-    let currentTheme = localStorage.getItem('hs_theme') || 'dark';
-    htmlEl.setAttribute('data-theme', currentTheme);
-    updateThemeIcon();
+    const themeIcons = {
+        dark: 'fa-moon',
+        light: 'fa-sun',
+        cyberpunk: 'fa-bolt',
+        ocean: 'fa-water',
+        sunrise: 'fa-cloud-sun',
+        nova: 'fa-star'
+    };
+    const validThemes = Object.keys(themeIcons);
+    let currentTheme = localStorage.getItem('hs_theme') || 'light';
+    if(!validThemes.includes(currentTheme)) currentTheme = 'light';
+    applyTheme(currentTheme);
 
     themeToggle.addEventListener('click', () => {
-        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        const isOpen = themePicker.classList.toggle('open');
+        themeToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    themeOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            applyTheme(option.dataset.themeChoice);
+            themePicker.classList.remove('open');
+            themeToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if(!themePicker.contains(event.target)) {
+            themePicker.classList.remove('open');
+            themeToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape') {
+            themePicker.classList.remove('open');
+            themeToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    function applyTheme(theme) {
+        currentTheme = validThemes.includes(theme) ? theme : 'light';
         htmlEl.setAttribute('data-theme', currentTheme);
         localStorage.setItem('hs_theme', currentTheme);
         updateThemeIcon();
-    });
+        updateThemeMenu();
+    }
 
     function updateThemeIcon() {
-        themeToggle.innerHTML = currentTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        themeToggle.innerHTML = `<i class="fa-solid ${themeIcons[currentTheme]}"></i>`;
+    }
+
+    function updateThemeMenu() {
+        themeOptions.forEach(option => {
+            option.classList.toggle('active', option.dataset.themeChoice === currentTheme);
+        });
     }
 
     // --- Loading Screen ---
@@ -118,43 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Marketplace Grid
-    const marketGrid = document.getElementById('marketplace-grid');
-    function renderMarketplace() {
-        marketGrid.innerHTML = '';
-        if (marketData.length === 0) {
-            marketGrid.innerHTML = '<p class="text-muted">No items available currently.</p>';
-            return;
-        }
-        marketData.forEach(item => {
-            const subject = encodeURIComponent(`Inquiry About ${item.title}`);
-            const body = encodeURIComponent(`Hello Hanuman Scraps,
-
-I would like to inquire about the scrap material:
-
-Product Name: ${item.title}
-Quantity: ${item.qty}
-
-Please share more details regarding pricing and availability.
-
-Thank you.`);
-
-            const card = document.createElement('div');
-            card.className = 'mp-card glass-panel';
-            card.innerHTML = `
-                <img src="${item.image}" alt="${item.title}" class="mp-card-img">
-                <div class="mp-card-body">
-                    <h3>${item.title}</h3>
-                    <div class="mp-qty">Qty: ${item.qty}</div>
-                    <div class="mp-price">₹${item.price}</div>
-                    <a href="mailto:hanumanscraps@gmail.com?subject=${subject}&body=${body}" class="btn btn-outline btn-block">Inquire Now</a>
-                </div>
-            `;
-            marketGrid.appendChild(card);
-        });
-    }
-    renderMarketplace();
-
     // Calculator
     const calcMaterial = document.getElementById('calc-material');
     const calcWeight = document.getElementById('calc-weight');
@@ -215,14 +216,17 @@ Thank you.`);
     updateAuthUI();
 
     // Login logic
-    adminLoginBtn.addEventListener('click', () => loginModal.classList.remove('hidden'));
+    adminLoginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginModal.classList.remove('hidden');
+    });
     document.querySelectorAll('.close-modal').forEach(btn => btn.addEventListener('click', () => loginModal.classList.add('hidden')));
     
     document.getElementById('login-form').addEventListener('submit', (e) => {
         e.preventDefault();
         const user = document.getElementById('admin-user').value;
         const pass = document.getElementById('admin-pass').value;
-        if(user === 'admin' && pass === 'admin') {
+        if(user === 'hanumanscraps@gmail.com' && pass === 'hanuman_goal@2027june') {
             isAdmin = true;
             sessionStorage.setItem('hs_admin', 'true');
             loginModal.classList.add('hidden');
@@ -233,7 +237,10 @@ Thank you.`);
     });
 
     // Dashboard Modal Logic
-    adminDashBtn.addEventListener('click', () => dashModal.classList.remove('hidden'));
+    adminDashBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        dashModal.classList.remove('hidden');
+    });
     document.querySelectorAll('.close-dash').forEach(btn => btn.addEventListener('click', () => dashModal.classList.add('hidden')));
 
     document.getElementById('admin-logout-btn').addEventListener('click', () => {
@@ -282,24 +289,6 @@ Thank you.`);
                 </div>
             `;
         });
-
-        // Market List
-        const adminMarketList = document.getElementById('admin-marketplace-list');
-        adminMarketList.innerHTML = '';
-        marketData.forEach(item => {
-            adminMarketList.innerHTML += `
-                <div class="admin-list-item">
-                    <div class="item-info">
-                        <img src="${item.image}" alt="">
-                        <div>
-                            <strong>${item.title}</strong>
-                            <div class="text-muted" style="font-size:0.8rem">₹${item.price} | ${item.qty}</div>
-                        </div>
-                    </div>
-                    <button class="btn btn-outline btn-sm" style="color:var(--primary);border-color:var(--primary)" onclick="deleteMarketItem('${item.id}')"><i class="fa-solid fa-trash"></i></button>
-                </div>
-            `;
-        });
     }
 
     // Global func for updating price
@@ -316,51 +305,6 @@ Thank you.`);
                 renderTicker();
                 alert('Price updated successfully!');
             }
-        }
-    };
-
-    // Add Marketplace Item with Image Base64
-    document.getElementById('add-marketplace-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const title = document.getElementById('mp-title').value;
-        const price = document.getElementById('mp-price').value;
-        const qty = document.getElementById('mp-qty').value;
-        const fileInput = document.getElementById('mp-image');
-        const file = fileInput.files[0];
-
-        if(file) {
-            // Check size < 500kb approx
-            if(file.size > 500000) {
-                alert("File is too large! Please upload an image smaller than 500KB to save in LocalStorage.");
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const base64Img = event.target.result;
-                const newItem = {
-                    id: 'mp_' + Date.now(),
-                    title,
-                    price,
-                    qty,
-                    image: base64Img
-                };
-                marketData.push(newItem);
-                saveData();
-                renderAdminDashboard();
-                renderMarketplace();
-                document.getElementById('add-marketplace-form').reset();
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    window.deleteMarketItem = (id) => {
-        if(confirm('Are you sure you want to remove this item?')) {
-            marketData = marketData.filter(item => item.id !== id);
-            saveData();
-            renderAdminDashboard();
-            renderMarketplace();
         }
     };
 

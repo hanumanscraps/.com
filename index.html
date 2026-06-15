@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hanuman Scraps - Premium Scrap Dealer</title>
     <meta name="description"
-        content="Hanuman Scraps offers the best prices for your recyclable materials. View our live pricing, book a pickup, or buy scrap material from our marketplace.">
+        content="Hanuman Scraps offers the best prices for your recyclable materials. View our live pricing or book a pickup.">
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
@@ -67,20 +67,23 @@
             <div class="nav-links" id="nav-links">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#pricing" class="nav-link">Live Prices</a>
-                <a href="#marketplace" class="nav-link">Marketplace</a>
                 <a href="#booking" class="nav-link">Book Pickup</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
 
             <div class="nav-tools">
-                <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
-                <div class="auth-section" id="auth-container">
-                    <button id="admin-login-btn" class="btn btn-outline btn-sm"><i class="fa-solid fa-user-lock"></i>
-                        Admin</button>
-                    <button id="admin-dash-btn" class="btn btn-primary btn-sm hidden"><i
-                            class="fa-solid fa-gauge-high"></i> Dashboard</button>
+                <div class="theme-picker">
+                    <button id="theme-toggle" class="btn-icon" type="button" aria-label="Choose Theme" aria-expanded="false">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <div id="theme-menu" class="theme-menu glass-panel" aria-label="Theme modes">
+                        <button type="button" class="theme-option" data-theme-choice="dark">Dark</button>
+                        <button type="button" class="theme-option" data-theme-choice="light">Light(Default)</button>
+                        <button type="button" class="theme-option" data-theme-choice="cyberpunk">Cyberpunk</button>
+                        <button type="button" class="theme-option" data-theme-choice="ocean">Ocean Deep</button>
+                        <button type="button" class="theme-option" data-theme-choice="sunrise">Sunrise</button>
+                        <button type="button" class="theme-option" data-theme-choice="nova">Nova</button>
+                    </div>
                 </div>
                 <button class="hamburger" id="hamburger" aria-label="Menu">
                     <i class="fa-solid fa-bars"></i>
@@ -111,7 +114,6 @@
                 <div class="hero-buttons">
                     <a href="#pricing" class="btn btn-primary btn-lg">Check Live Prices</a>
                     <a href="#booking" class="btn btn-secondary btn-lg">Book Pickup</a>
-                    <a href="#marketplace" class="btn btn-outline btn-lg">Sell Scrap</a>
                 </div>
             </div>
 
@@ -197,21 +199,6 @@
             </div>
         </section>
 
-        <!-- Scrap Selling Marketplace Section -->
-        <section id="marketplace" class="section section-darker">
-            <div class="container">
-                <div class="section-header gsap-fade-up">
-                    <h2 class="section-title">Scrap <span class="text-gradient">Marketplace</span></h2>
-                    <p class="section-desc">Processed and sorted scrap materials available for industrial bulk purchase.
-                    </p>
-                </div>
-
-                <div class="marketplace-grid" id="marketplace-grid">
-                    <!-- Marketplace items dynamically injected -->
-                </div>
-            </div>
-        </section>
-
         <!-- Pickup Booking Section -->
         <section id="booking" class="section">
             <div class="container">
@@ -252,13 +239,8 @@
                                     <input type="number" id="book-est-weight" placeholder="e.g. 100">
                                 </div>
                             </div>
-                            <!-- LocalStorage cannot handle large images well without quota issues. We ask them to send on WA -->
-                            <div class="alert-box">
-                                <i class="fa-solid fa-camera"></i> You can share scrap photos directly on WhatsApp after
-                                clicking book!
-                            </div>
                             <button type="submit" class="btn btn-primary btn-block"><i
-                                    class="fa-brands fa-whatsapp"></i> Book via WhatsApp</button>
+                                    class="fa-brands fa-whatsapp"></i> Send Enquiry</button>
                         </form>
                     </div>
                 </div>
@@ -384,7 +366,7 @@
                             <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
                             <div>
                                 <h4>Location</h4>
-                                <p>16th Main, Mico Layout, Hongasandra <br> Bangalore 560068</p>
+                                <p>Begur main road, Hongasandra <br> Bangalore 560068</p>
                             </div>
                         </div>
                         <div class="info-item glass-panel">
@@ -403,10 +385,10 @@
                         </div>
                     </div>
 
-                    <a href="https://maps.app.goo.gl/fuEHvcHRHF3QEHPNA" target="_blank"
+                    <a href="https://maps.app.goo.gl/xQbT7qD7EL7CRHsc6" target="_blank"
                         class="map-container glass-panel gsap-fade-right clickable-map">
                         <iframe
-                            src="https://maps.google.com/maps?q=12.888995,77.630282&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                            src="https://maps.google.com/maps?q=12.8801502,77.6221902&t=&z=17&ie=UTF8&iwloc=&output=embed"
                             width="100%" height="100%"
                             style="border:0; pointer-events: none; border-radius: var(--radius); position: absolute; top: 0; left: 0;"
                             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
@@ -441,16 +423,19 @@
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#pricing">Live Prices</a></li>
-                        <li><a href="#marketplace">Marketplace</a></li>
                         <li><a href="#booking">Book Pickup</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                        <li class="auth-section" id="auth-container">
+                            <a href="#admin-login" id="admin-login-btn">Admin</a>
+                            <a href="#admin-dashboard" id="admin-dash-btn" class="hidden"><i
+                                    class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -498,42 +483,12 @@
             <div class="modal-body">
                 <div class="admin-tabs">
                     <button class="tab-btn active" data-tab="tab-prices">Manage Prices</button>
-                    <button class="tab-btn" data-tab="tab-marketplace">Marketplace</button>
                 </div>
 
                 <!-- Tab: Prices -->
                 <div id="tab-prices" class="tab-content active">
                     <p class="mb-3 text-muted">Update live prices for scrap categories.</p>
                     <div id="admin-price-list" class="admin-list">
-                        <!-- Populated via JS -->
-                    </div>
-                </div>
-
-                <!-- Tab: Marketplace -->
-                <div id="tab-marketplace" class="tab-content hidden">
-                    <p class="mb-3 text-muted">Add products available for resale.</p>
-                    <form id="add-marketplace-form" class="mb-4">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" id="mp-title" placeholder="Product Title" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="mp-price" placeholder="Price (₹)" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" id="mp-qty" placeholder="Quantity Available" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="file" id="mp-image" accept="image/*" required>
-                                <small class="text-muted">Max size: 500kb (LocalStorage limit)</small>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Add Product</button>
-                    </form>
-                    <h4>Current Listings</h4>
-                    <div id="admin-marketplace-list" class="admin-list mt-2">
                         <!-- Populated via JS -->
                     </div>
                 </div>
