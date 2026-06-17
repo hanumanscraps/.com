@@ -10,22 +10,67 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'ewaste', name: 'E-Waste (General)', category: 'ewaste', price: 150, unit: 'kg', image: 'ewaste.png' }
     ];
 
-    let pricesData = JSON.parse(localStorage.getItem('hs_prices_v4')) || defaultPrices;
+    const PRICES_API = 'api/prices.php';
+    let pricesData = defaultPrices.map(item => ({ ...item }));
     let isAdmin = sessionStorage.getItem('hs_admin') === 'true';
+    let adminCredentials = JSON.parse(sessionStorage.getItem('hs_admin_credentials') || 'null');
+    let currentPriceFilter = 'all';
 
-    function saveData() {
+    function normalizePrices(prices) {
+        return defaultPrices.map(defaultItem => {
+            const savedItem = Array.isArray(prices) ? prices.find(p => p.id === defaultItem.id) : null;
+            return {
+                ...defaultItem,
+                ...savedItem,
+                price: Number(savedItem?.price ?? defaultItem.price)
+            };
+        });
+    }
+
+    async function loadPrices() {
+        try {
+            const response = await fetch(`${PRICES_API}?t=${Date.now()}`, { cache: 'no-store' });
+            if(!response.ok) throw new Error('Unable to load prices');
+
+            const data = await response.json();
+            pricesData = normalizePrices(data.prices);
+        } catch (error) {
+            const localPrices = JSON.parse(localStorage.getItem('hs_prices_v4') || 'null');
+            pricesData = normalizePrices(localPrices);
+            console.warn('Using fallback prices:', error);
+        }
+    }
+
+    async function saveData() {
+        if(!adminCredentials) {
+            throw new Error('Please login again before updating prices.');
+        }
+
+        const response = await fetch(PRICES_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username: adminCredentials.username,
+                password: adminCredentials.password,
+                prices: pricesData
+            })
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if(!response.ok) {
+            throw new Error(data.error || 'Unable to save prices');
+        }
+
+        pricesData = normalizePrices(data.prices);
         localStorage.setItem('hs_prices_v4', JSON.stringify(pricesData));
     }
 
-    // Ensure fallback images if missing or outdated SVG
-    pricesData = pricesData.map(p => {
-        if(!p.image || p.image === 'ewaste.svg') {
-            const dp = defaultPrices.find(d => d.id === p.id);
-            p.image = dp ? dp.image : 'iron.png';
-        }
-        return p;
-    });
-    saveData();
+    function refreshPriceUI() {
+        renderPricing(currentPriceFilter);
+        populateCalcSelect();
+        renderTicker();
+        if(isAdmin) renderAdminDashboard();
+    }
 
     // --- Theme Management ---
     const themeToggle = document.getElementById('theme-toggle');
@@ -116,13 +161,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Duplicate for seamless loop
         tickerWrap.innerHTML = html + html;
     }
-    renderTicker();
 
     // Pricing Grid & Filters
     const pricingGrid = document.getElementById('pricing-grid');
     const filterBtns = document.querySelectorAll('.filter-btn');
     
     function renderPricing(filter = 'all') {
+        currentPriceFilter = filter;
         pricingGrid.innerHTML = '';
         const filtered = filter === 'all' ? pricesData : pricesData.filter(p => p.category === filter);
         
@@ -146,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
             pricingGrid.appendChild(card);
         });
     }
-    renderPricing();
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -170,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
             calcMaterial.appendChild(opt);
         });
     }
-    populateCalcSelect();
 
     function updateCalc() {
         const price = parseFloat(calcMaterial.value) || 0;
@@ -228,7 +271,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const pass = document.getElementById('admin-pass').value;
         if(user === 'hanumanscraps@gmail.com' && pass === 'hanuman_goal@2027june') {
             isAdmin = true;
+            adminCredentials = { username: user, password: pass };
             sessionStorage.setItem('hs_admin', 'true');
+            sessionStorage.setItem('hs_admin_credentials', JSON.stringify(adminCredentials));
             loginModal.classList.add('hidden');
             updateAuthUI();
         } else {
@@ -245,7 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('admin-logout-btn').addEventListener('click', () => {
         isAdmin = false;
+        adminCredentials = null;
         sessionStorage.removeItem('hs_admin');
+        sessionStorage.removeItem('hs_admin_credentials');
         dashModal.classList.add('hidden');
         updateAuthUI();
     });
@@ -292,21 +339,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Global func for updating price
-    window.updatePrice = (id) => {
+    window.updatePrice = async (id) => {
         const input = document.getElementById(`admin-price-${id}`);
         const newPrice = parseFloat(input.value);
         if(!isNaN(newPrice) && newPrice > 0) {
             const idx = pricesData.findIndex(p => p.id === id);
             if(idx > -1) {
+                const oldPrice = pricesData[idx].price;
                 pricesData[idx].price = newPrice;
-                saveData();
-                renderPricing();
-                populateCalcSelect();
-                renderTicker();
-                alert('Price updated successfully!');
+                try {
+                    await saveData();
+                    refreshPriceUI();
+                    alert('Price updated successfully!');
+                } catch (error) {
+                    pricesData[idx].price = oldPrice;
+                    alert(error.message || 'Unable to update price. Please try again.');
+                }
             }
         }
     };
+
+    loadPrices().then(refreshPriceUI);
 
     // --- Third-Party Inits ---
 
